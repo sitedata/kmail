@@ -50,13 +50,13 @@ void CollectionViewPage::init(const Akonadi::Collection &col)
 
     // Musn't be able to edit details for non-resource, system folder.
     if (!mIsLocalSystemFolder) {
-        // auto innerLayout = qobject_cast<QFormLayout *>(mCollectionViewWidget->layout());
-        // Q_ASSERT(innerLayout != nullptr);
+        auto innerLayout = qobject_cast<QFormLayout *>(mCollectionViewWidget->layout());
+        Q_ASSERT(innerLayout != nullptr);
 
         // icons
         mIconsCheckBox = new QCheckBox(i18n("Use custom &icons"), this);
         mIconsCheckBox->setChecked(false);
-        // innerLayout->insertRow(0, QString(), mIconsCheckBox);
+        innerLayout->insertRow(0, QString(), mIconsCheckBox);
 
         mNormalIconLabel = new QLabel(i18nc("Icon used for folders with no unread messages.", "&Normal:"), this);
         mNormalIconLabel->setEnabled(false);
@@ -90,7 +90,7 @@ void CollectionViewPage::init(const Akonadi::Collection &col)
         iconHLayout->addWidget(mUnreadIconLabel);
         iconHLayout->addWidget(mUnreadIconButton);
         iconHLayout->addStretch(1);
-        // innerLayout->insertRow(1, QString(), iconHLayout);
+        innerLayout->insertRow(1, QString(), iconHLayout);
 
         connect(mIconsCheckBox, &QCheckBox::toggled, mNormalIconLabel, &QLabel::setEnabled);
         connect(mIconsCheckBox, &QCheckBox::toggled, mNormalIconButton, &KIconButton::setEnabled);
